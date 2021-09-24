@@ -7,7 +7,13 @@ import notesRouter from "./routes/notes.js";
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+const whitelist = ['http:localhost:3000','https://server-for-notes.herokuapp.com/'];
+const corsOptions = {
+    origin: 'https://server-for-notes.herokuapp.com/',
+    optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
