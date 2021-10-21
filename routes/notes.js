@@ -4,6 +4,7 @@ const notesRouter = express.Router();
 
 notesRouter.route('/').get((req, res) => {
     Note.find()
+        .limit(3)
         .then(notes => res.json(notes))
         .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -11,8 +12,6 @@ notesRouter.route('/').get((req, res) => {
 notesRouter.route('/add').post((req, res) => {
     const noteTitle = req.body.noteTitle;
     const noteBody = req.body.noteBody;
-
-
     const newNote = new Note({noteTitle, noteBody});
 
     newNote.save()
