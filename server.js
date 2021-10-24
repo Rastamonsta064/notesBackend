@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 
 const whitelist = ['http:localhost:3000','https://server-for-notes.herokuapp.com/'];
 const corsOptions = {
-    origin: 'https://rastamonsta064.github.io/',
+    origin: 'https://server-for-notes.herokuapp.com/',
     optionsSuccessStatus: 200
 };
 
