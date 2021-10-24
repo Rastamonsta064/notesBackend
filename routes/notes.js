@@ -3,7 +3,9 @@ import Note from "../models/note.model.js";
 const notesRouter = express.Router();
 
 notesRouter.route('/').get((req, res) => {
+    const skip = Number(req.query.skip);
     Note.find()
+        .skip(skip)
         .limit(3)
         .then(notes => res.json(notes))
         .catch(err => res.status(400).json('Error: ' + err));
