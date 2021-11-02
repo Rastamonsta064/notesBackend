@@ -11,6 +11,17 @@ notesRouter.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+notesRouter.route('/search/:query').get((req,res)=> {
+    const query = req.params.query;
+    const skip = Number(req.query.skip);
+    const regex = new RegExp(query, 'i');
+        Note.find({noteTitle:{$regex: regex}})
+            .skip(skip)
+            .limit(3)
+            .then(notes => res.json(notes))
+            .catch(err => res.status(400).json('Error: ' + err));
+})
+
 notesRouter.route('/add').post((req, res) => {
     const noteTitle = req.body.noteTitle;
     const noteBody = req.body.noteBody;
